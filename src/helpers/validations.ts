@@ -47,6 +47,8 @@ export const validateExpirationMonth = (m: string) => {
 export const validatePk = (key: string | undefined) => {
     if (!key) throw Error("No se encontro la llave pk");
 
-    const keyParts = key.split(" ")[1].split("_");
+    const keyParts = key.includes("Bearer")
+        ? key.split(" ")[1].split("_")
+        : key.split("_");
     return keyParts[0] === "pk" && keyParts[1] === "test";
 };
