@@ -16,4 +16,4 @@ npm run dev
 ### Endpoints
 
 	POST     {{baseURL}}/tokens
-	GET       {{baseURL}}/cards?token=xxxxxxxxxxxxxxx
+	GET      {{baseURL}}/cards?token=xxxxxxxxxxxxxxx
