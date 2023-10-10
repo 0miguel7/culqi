@@ -1,0 +1,21 @@
+service: culqi
+
+useDotenv: true
+
+provider:
+    name: aws
+    runtime: nodejs18.x
+
+functions:
+    hello:
+        handler: src/functions/index.handler
+        events:
+            - httpApi: POST /tokens
+    bye:
+        handler: src/functions/retrieve.handler
+        events:
+            - httpApi: GET /cards
+
+plugins:
+    - serverless-offline
+    - serverless-esbuild
