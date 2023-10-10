@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "dev": "serverless offline",
-        "test": "jest"
+        "test": "jest",
+        "deploy": "serverless deploy"
     },
     "keywords": [],
     "author": "",
@@ -23,6 +24,7 @@
     },
     "dependencies": {
         "@types/aws-lambda": "^8.10.124",
+        "dotenv": "^16.3.1",
         "mongoose": "^7.6.1",
         "ts-jest": "^29.1.1"
     }
