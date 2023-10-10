@@ -9,6 +9,7 @@ import {
     validateYear,
     validatePk,
 } from "../helpers/validations";
+import { HttpError } from "../helpers/error";
 import { CardModel } from "../infraestructure/mongo";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) => {
@@ -31,7 +32,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) =>
         };
     } catch (error) {
         return {
-            statusCode: 400,
+            statusCode: error.statusCode || 500,
             body: JSON.stringify({ message: error.message }),
         };
     }
@@ -41,15 +42,17 @@ const validateFields = (userCard: ICard) => {
     const { card_number, cvv, email, expiration_month, expiration_year } = userCard;
 
     if (!card_number || !validateCardNumber(card_number))
-        throw Error("Numero de tarjeta invalido");
+        throw new HttpError(400, "Numero de tarjeta invalido");
 
-    if (!cvv || !validateCvv(cvv)) throw Error("Numero cvv proporcionado es inválido");
+    if (!cvv || !validateCvv(cvv))
+        throw new HttpError(400, "Numero cvv proporcionado es inválido");
 
-    if (!expiration_year || !validateYear(expiration_year)) throw Error("Año inválido");
+    if (!expiration_year || !validateYear(expiration_year))
+        throw new HttpError(400, "Año inválido");
 
     if (!email || !validateEmail(email))
-        throw Error("El email proporcionado es invalido");
+        throw new HttpError(400, "El email proporcionado es invalido");
 
     if (!expiration_month || !validateExpirationMonth(expiration_month))
-        throw Error("Cvv inválido");
+        throw new HttpError(400, "Cvv inválido");
 };

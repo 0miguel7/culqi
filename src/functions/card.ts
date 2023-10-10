@@ -1,6 +1,7 @@
 import { APIGatewayEvent, APIGatewayProxyHandler } from "aws-lambda";
 import { validatePk } from "../helpers/validations";
 import { CardModel } from "../infraestructure/mongo";
+import { HttpError } from "../helpers/error";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) => {
     try {
@@ -9,7 +10,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) =>
 
         const token = event.queryStringParameters?.token;
         const response = await CardModel.findOne({ token });
-        if (!response) throw Error("No se encontró la tarjeta");
+        if (!response) throw new HttpError(404, "No se encontró la tarjeta");
 
         return {
             statusCode: 200,
@@ -25,7 +26,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) =>
         };
     } catch (error) {
         return {
-            statusCode: 400,
+            statusCode: error.statusCode || 500,
             body: JSON.stringify({ message: error.message }),
         };
     }
