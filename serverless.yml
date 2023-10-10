@@ -7,12 +7,12 @@ provider:
     runtime: nodejs18.x
 
 functions:
-    hello:
+    token:
         handler: src/functions/token.handler
         events:
             - httpApi: POST /tokens
-    bye:
-        handler: src/functions/cardU.handler
+    card:
+        handler: src/functions/card.handler
         events:
             - httpApi: GET /cards
 
