@@ -14,10 +14,13 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) =>
         return {
             statusCode: 200,
             body: JSON.stringify({
-                email: response.email,
-                card_number: response.card_number,
-                expiration_year: response.expiration_year,
-                expiration_month: response.expiration_month,
+                message: "Tarjeta encontrada satisfactoriamente",
+                data: {
+                    email: response.email,
+                    card_number: response.card_number,
+                    expiration_year: response.expiration_year,
+                    expiration_month: response.expiration_month,
+                },
             }),
         };
     } catch (error) {

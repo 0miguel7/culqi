@@ -8,11 +8,11 @@ provider:
 
 functions:
     hello:
-        handler: src/functions/index.handler
+        handler: src/functions/token.handler
         events:
             - httpApi: POST /tokens
     bye:
-        handler: src/functions/retrieve.handler
+        handler: src/functions/cardU.handler
         events:
             - httpApi: GET /cards
 

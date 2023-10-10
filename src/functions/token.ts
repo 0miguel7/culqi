@@ -24,7 +24,10 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayEvent) =>
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ token }),
+            body: JSON.stringify({
+                message: "Tarjeta guardada y token generado",
+                token,
+            }),
         };
     } catch (error) {
         return {
